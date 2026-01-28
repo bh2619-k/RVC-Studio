@@ -1,10 +1,10 @@
 <div align="center">
 
-# Advanced RVC Inference
+# RVC Studio
 
-Advanced RVC Inference presents itself as a state-of-the-art web UI crafted to streamline rapid and effortless inference. This comprehensive toolset encompasses a model downloader, a voice splitter, training and more.
+RVC Studio presents itself as a state-of-the-art web UI crafted to streamline rapid and effortless inference. This comprehensive toolset encompasses a model downloader, a voice splitter, training and more.
 
-[![Open in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ArkanDash/Advanced-RVC-Inference/blob/master/Advanced-RVC.ipynb)
+[![Open in Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bh2619-k/RVC-Studio/blob/master/Advanced-RVC.ipynb)
 
 </div>
 
@@ -14,7 +14,7 @@ Advanced RVC Inference presents itself as a state-of-the-art web UI crafted to s
 - **Model Training**: Complete training pipeline for creating custom RVC models
 - **Real-time Processing**: Low-latency real-time voice conversion support
 - **Web UI**: Intuitive Gradio-based web interface
-- **CLI Support**: Command-line interface for scripting and automation 
+- **CLI Support**: Command-line interface for scripting and automation
 - **API Access**: Python API for programmatic access
 - **Audio Separation**: Built-in tools for vocal/instrument separation
 - **Text-to-Speech**: Integration with edge-tts for TTS-based voice conversion
@@ -22,7 +22,7 @@ Advanced RVC Inference presents itself as a state-of-the-art web UI crafted to s
 ## Installation
 
 ```bash
-pip install git+https://github.com/ArkanDash/Advanced-RVC-Inference.git
+pip install git+https://github.com/bh2619-k/RVC-Studio.git
 ```
 
 ### With GPU Support
@@ -30,17 +30,16 @@ pip install git+https://github.com/ArkanDash/Advanced-RVC-Inference.git
 For CUDA-enabled GPUs:
 
 ```bash
-pip install git+https://github.com/ArkanDash/Advanced-RVC-Inference.git#egg=advanced-rvc-inference[gpu]
+pip install git+https://github.com/bh2619-k/RVC-Studio.git#egg=RVC-Studio[gpu]
 ```
 
 ### From Source
 
 ```bash
-git clone https://github.com/ArkanDash/Advanced-RVC-Inference.git
-cd Advanced-RVC-Inference
+git clone https://github.com/bh2619-k/RVC-Studio.git
+cd RVC-Studio
 pip install -e .
 ```
-
 
 ## Quick Start
 
@@ -58,8 +57,7 @@ The web interface will be available at `http://localhost:7860`
 
 ### Command Line Interface
 
-see guides more at [Wiki](https://github.com/ArkanDash/Advanced-RVC-Inference/wiki/Cli-Guide)!
-
+see guides more at [Wiki](https://github.com/bh2619-k/RVC-Studio/wiki/Cli-Guide)!
 
 ### Python API
 
@@ -86,8 +84,6 @@ audio_files = rvc.infer_batch(
 # Cleanup
 rvc.unload_model()
 ```
-
-
 
 ### Quick Inference
 
@@ -129,7 +125,7 @@ rvc-cli serve --port 7860
 
 View help for any command:
 
-```bash
+````bash
 rvc-cli --help
 rvc-cli infer --help
 rvc-cli separate --help
@@ -159,14 +155,12 @@ Configuration is managed through `advanced_rvc_inference/configs/config.json`:
     "theme": "NoCrypt/miku",
     "uvr_path": "advanced_rvc_inference/assets/audios"
 }
-```
-
-
+````
 
 ## Documentation
 
-- [API Reference](https://github.com/ArkanDash/Advanced-RVC-Inference#api-reference)
-- [Usage Guide](https://github.com/ArkanDash/Advanced-RVC-Inference#usage)
+- [API Reference](https://github.com/bh2619-k/RVC-Studio#api-reference)
+- [Usage Guide](https://github.com/bh2619-k/RVC-Studio#usage)
 - [Contributing](CONTRIBUTING.md)
 
 ## Troubleshooting
@@ -187,7 +181,6 @@ Reduce batch size or use CPU mode:
 rvc = RVCInference(device="cpu")
 ```
 
-
 ## Contributing
 
 Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
@@ -207,25 +200,6 @@ The use of the converted voice for the following purposes is prohibited:
 - Impersonation of the original owner of the voice with malicious intentions
 - Fraudulent purposes that lead to identity theft or fraudulent phone calls
 
-## Credits
-
-| Repository | Owner |
-|------------|-------|
-| [Vietnamese-RVC](https://github.com/PhamHuynhAnh16/Vietnamese-RVC) | Phạm Huỳnh Anh |
-| [Applio](https://github.com/IAHispano/Applio) | IAHispano |
-| [python-audio-separator](https://github.com/nomadkaraoke/python-audio-separator) | Nomad Karaoke |
-| [whisper](https://github.com/openai/whisper) | OpenAI |
-
 ## Support
 
-For issues and feature requests, please use the [GitHub Issues](https://github.com/ArkanDash/Advanced-RVC-Inference/issues) page.
-
-## NOTES
-if you want use older verion use v1 branch (py3.12+ support comming soon), dont't lazy
----
-
-<div align="center">
-
-**Made with by ArkanDash**
-
-</div>
+For issues and feature requests, please use the [GitHub Issues](https://github.com/bh2619-k/RVC-Studio/issues) page.

@@ -195,7 +195,7 @@ def _check_dependencies():
 
         warnings.warn(
             f"Missing optional dependencies: {', '.join(missing)}. "
-            f"Install them with: pip install advanced-rvc-inference",
+            f"Install them with: pip install RVC-Studio",
             ImportWarning,
         )
 

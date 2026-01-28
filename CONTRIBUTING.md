@@ -1,6 +1,6 @@
-# Contributing to Advanced-RVC-Inference
+# Contributing to RVC-Studio
 
-Thank you for your interest in contributing to Advanced-RVC-Inference! We're excited to have you here and can't wait to see what you'll bring to our community. This guide will help you get started with contributing to this project.
+Thank you for your interest in contributing to RVC-Studio! We're excited to have you here and can't wait to see what you'll bring to our community. This guide will help you get started with contributing to this project.
 
 ## Table of Contents
 
@@ -35,14 +35,14 @@ Before you begin, ensure you have the following installed:
 2. Clone your fork locally:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/Advanced-RVC-Inference.git
-cd Advanced-RVC-Inference
+git clone https://github.com/YOUR-USERNAME/RVC-Studio.git
+cd RVC-Studio
 ```
 
 3. Add the upstream repository:
 
 ```bash
-git remote add upstream https://github.com/ArkanDash/Advanced-RVC-Inference.git
+git remote add upstream https://github.com/bh2619-k/RVC-Studio.git
 ```
 
 ## Development Setup
@@ -130,6 +130,7 @@ This project follows [PEP 8](https://www.python.org/dev/peps/pep-0008/) with som
 - Maximum line length: 120 characters
 - Use descriptive variable and function names
 - Write docstrings for all public functions and classes
+
 ### Import Order
 
 Organize imports in the following order:
@@ -196,12 +197,14 @@ Priority areas for test coverage:
 ### Creating a Pull Request
 
 1. **Sync with upstream**:
+
    ```bash
    git fetch upstream
    git merge upstream/main
    ```
 
 2. **Create a feature branch**:
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -211,6 +214,7 @@ Priority areas for test coverage:
 4. **Commit your changes** with a clear message
 
 5. **Push to your fork**:
+
    ```bash
    git push origin feature/your-feature-name
    ```
@@ -231,9 +235,11 @@ Priority areas for test coverage:
 
 ```markdown
 ## Description
+
 Brief description of what this PR does
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Documentation update
@@ -241,11 +247,13 @@ Brief description of what this PR does
 - [ ] Code refactoring
 
 ## Testing
+
 - [ ] I have tested the changes locally
 - [ ] I have added/updated tests
 - [ ] Tests pass successfully
 
 ## Checklist
+
 - [ ] My code follows the style guidelines
 - [ ] I have performed self-review
 - [ ] I have commented complex code
@@ -267,16 +275,16 @@ Follow the [Conventional Commits](https://www.conventionalcommits.org/) format:
 
 ### Commit Types
 
-| Type | Description |
-|------|-------------|
-| `feat` | A new feature |
-| `fix` | A bug fix |
-| `docs` | Documentation changes |
-| `style` | Code style changes (formatting, etc.) |
+| Type       | Description                           |
+| ---------- | ------------------------------------- |
+| `feat`     | A new feature                         |
+| `fix`      | A bug fix                             |
+| `docs`     | Documentation changes                 |
+| `style`    | Code style changes (formatting, etc.) |
 | `refactor` | Code refactoring (no behavior change) |
-| `perf` | Performance improvements |
-| `test` | Adding or modifying tests |
-| `chore` | Maintenance tasks |
+| `perf`     | Performance improvements              |
+| `test`     | Adding or modifying tests             |
+| `chore`    | Maintenance tasks                     |
 
 ### Examples
 
@@ -305,9 +313,8 @@ test(core): add unit tests for f0 extraction module
 
 Join our community for discussions and support:
 
-- **Discord**: [https://discord.gg/hvmsukmBHE](https://discord.gg/hvmsukmBHE)
-- **GitHub Issues**: [https://github.com/ArkanDash/Advanced-RVC-Inference/issues](https://github.com/ArkanDash/Advanced-RVC-Inference/issues)
-- **GitHub Discussions**: [https://github.com/ArkanDash/Advanced-RVC-Inference/discussions](https://github.com/ArkanDash/Advanced-RVC-Inference/discussions)
+- **GitHub Issues**: [https://github.com/bh2619-k/RVC-Studio/issues](https://github.com/bh2619-k/RVC-Studio/issues)
+- **GitHub Discussions**: [https://github.com/bh2619-k/RVC-Studio/discussions](https://github.com/bh2619-k/RVC-Studio/discussions)
 
 ## Recognition
 
@@ -319,4 +326,4 @@ Contributors will be recognized in:
 
 ---
 
-Thank you for contributing to Advanced-RVC-Inference! Your efforts help make this project better for everyone.
+Thank you for contributing to RVC-Studio! Your efforts help make this project better for everyone.

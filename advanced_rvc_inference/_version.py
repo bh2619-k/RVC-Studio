@@ -4,7 +4,7 @@ __version__ = "2.0.0"
 __author__ = "ArkanDash"
 __email__ = "arkandash@example.com"
 __license__ = "MIT"
-__url__ = "https://github.com/ArkanDash/Advanced-RVC-Inference"
+__url__ = "https://github.com/bh2619-k/RVC-Studio"
 
 # Version info for programmatic access
 version_info = tuple(int(x) for x in __version__.split("."))

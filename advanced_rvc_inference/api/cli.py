@@ -241,7 +241,7 @@ Examples:
   rvc-cli info
 
 For more information, visit:
-  https://github.com/ArkanDash/Advanced-RVC-Inference
+  https://github.com/bh2619-k/RVC-Studio
         """.strip(),
     )
 
@@ -266,15 +266,9 @@ For more information, visit:
     infer_parser.add_argument(
         "-m", "--model", required=True, help="Path to the RVC model file (.pth or .onnx)"
     )
-    infer_parser.add_argument(
-        "-i", "--input", required=True, help="Path to the input audio file"
-    )
-    infer_parser.add_argument(
-        "-o", "--output", help="Path to the output audio file"
-    )
-    infer_parser.add_argument(
-        "-p", "--pitch", type=int, default=0, help="Pitch shift (semitones)"
-    )
+    infer_parser.add_argument("-i", "--input", required=True, help="Path to the input audio file")
+    infer_parser.add_argument("-o", "--output", help="Path to the output audio file")
+    infer_parser.add_argument("-p", "--pitch", type=int, default=0, help="Pitch shift (semitones)")
     infer_parser.add_argument(
         "-f",
         "--format",
@@ -282,9 +276,7 @@ For more information, visit:
         choices=["wav", "mp3", "flac", "ogg"],
         help="Output format",
     )
-    infer_parser.add_argument(
-        "--index", help="Path to the index file (.index)"
-    )
+    infer_parser.add_argument("--index", help="Path to the index file (.index)")
     infer_parser.set_defaults(handler=cmd_inference)
 
     # Train command
@@ -293,9 +285,7 @@ For more information, visit:
         help="Train RVC models",
         description="Train RVC voice models (use web UI for full features)",
     )
-    train_parser.add_argument(
-        "--name", help="Name for the training experiment"
-    )
+    train_parser.add_argument("--name", help="Name for the training experiment")
     train_parser.set_defaults(handler=cmd_train)
 
     # Download command

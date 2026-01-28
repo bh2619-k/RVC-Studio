@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "advanced-rvc-inference"
+name = "RVC-Studio"
 version = "0.1.0"
 description = "Advanced RVC Inference - A comprehensive tool for RVC (Retrieval-based Voice Conversion) inference, training, and more"
 requires-python = ">=3.10,<3.13"
@@ -112,10 +112,9 @@ rvc-cli = "rvc_cli:main"
 rvc-gui = "advanced_rvc_inference.app.gui:launch"
 
 [project.urls]
-Homepage = "https://github.com/ArkanDash/Advanced-RVC-Inference"
-Repository = "https://github.com/ArkanDash/Advanced-RVC-Inference.git"
-Issues = "https://github.com/ArkanDash/Advanced-RVC-Inference/issues"
-Discord = "https://discord.gg/hvmsukmBHE"
+Homepage = "https://github.com/bh2619-k/RVC-Studio"
+Repository = "https://github.com/bh2619-k/RVC-Studio.git"
+Issues = "https://github.com/bh2619-k/RVC-Studio/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]

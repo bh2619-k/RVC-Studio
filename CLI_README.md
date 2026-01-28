@@ -31,8 +31,8 @@ A comprehensive command-line interface for the Advanced RVC Inference framework.
 
 ```bash
 # Clone the repository
-git clone https://github.com/ArkanDash/Advanced-RVC-Inference.git
-cd Advanced-RVC-Inference
+git clone https://github.com/bh2619-k/RVC-Studio.git
+cd RVC-Studio
 
 # Install the package
 pip install -e .
@@ -100,10 +100,12 @@ rvc-cli infer -m <model> -i <input> [options]
 ```
 
 **Required Arguments:**
+
 - `-m, --model`: Path to RVC model file (.pth or .onnx)
 - `-i, --input`: Path to input audio file
 
 **Optional Arguments:**
+
 - `-o, --output`: Output file path (auto-generated if not specified)
 - `-p, --pitch`: Pitch shift in semitones (default: 0)
 - `-f, --format`: Output format - wav, mp3, flac, ogg (default: wav)
@@ -127,6 +129,7 @@ rvc-cli infer -m <model> -i <input> [options]
 - `--clean_strength`: Cleaning strength (default: 0.7)
 
 **Example:**
+
 ```bash
 rvc-cli infer -m artist_model.pth -i speech.wav -o converted.wav -p 2 \
     --index_rate 0.75 --f0_method rmvpe --clean_audio
@@ -141,9 +144,11 @@ rvc-cli uvr -i <input> [options]
 ```
 
 **Required Arguments:**
+
 - `-i, --input`: Path to input audio file
 
 **Optional Arguments:**
+
 - `-o, --output`: Output directory (default: ./audios/uvr)
 - `-f, --format`: Output format (default: wav)
 - `--model`: Separation model (default: MDXNET_Main)
@@ -163,12 +168,14 @@ rvc-cli uvr -i <input> [options]
 - `--separate_reverb`: Separate reverb
 
 **Available Models:**
+
 - MDXNET_Main, MDXNET_9482
 - HP-Vocal-1, HP-Vocal-2
 - Inst_HQ_1 through Inst_HQ_5
 - Kim_Vocal_1, Kim_Vocal_2
 
 **Example:**
+
 ```bash
 rvc-cli uvr -i song.wav --model HP-Vocal-2 --aggression 10 \
     --enable_denoise --output ./vocals
@@ -185,10 +192,12 @@ rvc-cli create-dataset -i <directory> [options]
 ```
 
 **Required Arguments (one of):**
+
 - `-u, --url`: YouTube URL (separate multiple with commas)
 - `-i, --input`: Input directory with audio files
 
 **Optional Arguments:**
+
 - `-o, --output`: Output directory (default: ./dataset)
 - `--sample_rate`: Sample rate (default: 48000)
 - `--clean_dataset`: Apply data cleaning
@@ -199,6 +208,7 @@ rvc-cli create-dataset -i <directory> [options]
 - `--skip_end`: Seconds to skip at end (default: 0)
 
 **Example:**
+
 ```bash
 rvc-cli create-dataset -u "https://youtube.com/watch?v=xxx" \
     --sample_rate 48000 --separate --output ./my_dataset
@@ -213,13 +223,16 @@ rvc-cli create-index <model_name> [options]
 ```
 
 **Arguments:**
+
 - `model_name`: Name of the model
 
 **Optional Arguments:**
+
 - `--version`: RVC version - v1 or v2 (default: v2)
 - `--algorithm`: Index algorithm - Auto, Faiss, or KMeans (default: Auto)
 
 **Example:**
+
 ```bash
 rvc-cli create-index mymodel --version v2 --algorithm Faiss
 ```
@@ -233,10 +246,12 @@ rvc-cli extract <model_name> --sample_rate <rate> [options]
 ```
 
 **Required Arguments:**
+
 - `model_name`: Name of the model
 - `--sample_rate`: Sample rate of input audio
 
 **Optional Arguments:**
+
 - `--version`: RVC version - v1 or v2 (default: v2)
 - `--f0_method`: F0 extraction method (default: rmvpe)
 - `--f0_onnx`: Use ONNX F0 predictor
@@ -248,6 +263,7 @@ rvc-cli extract <model_name> --sample_rate <rate> [options]
 - `--rms_extract`: Extract RMS energy
 
 **Example:**
+
 ```bash
 rvc-cli extract mymodel --sample_rate 48000 --f0_method rmvpe \
     --gpu 0 --pitch_guidance
@@ -262,10 +278,12 @@ rvc-cli preprocess <model_name> --sample_rate <rate> [options]
 ```
 
 **Required Arguments:**
+
 - `model_name`: Name of the model
 - `--sample_rate`: Sample rate
 
 **Optional Arguments:**
+
 - `--dataset_path`: Dataset path (default: ./dataset)
 - `--cpu_cores`: CPU cores (default: 2)
 - `--cut_method`: Cutting method - Automatic, Simple, or Skip (default: Automatic)
@@ -276,6 +294,7 @@ rvc-cli preprocess <model_name> --sample_rate <rate> [options]
 - `--normalization`: Normalization mode - none, pre, or post (default: none)
 
 **Example:**
+
 ```bash
 rvc-cli preprocess mymodel --sample_rate 48000 --cut_method Automatic \
     --process_effects --normalization pre
@@ -290,9 +309,11 @@ rvc-cli train <model_name> [options]
 ```
 
 **Required Arguments:**
+
 - `model_name`: Name of the model
 
 **Optional Arguments:**
+
 - `--version`: RVC version - v1 or v2 (default: v2)
 - `--author`: Model author name
 - `--epochs`: Total training epochs (default: 300)
@@ -314,6 +335,7 @@ rvc-cli train <model_name> [options]
 - `--reference_path`: Path to reference set
 
 **Example:**
+
 ```bash
 rvc-cli train mymodel --version v2 --epochs 500 --batch_size 8 \
     --gpu 0 --save_every 100 --vocoder "MRF-HiFi-GAN"
@@ -328,9 +350,11 @@ rvc-cli create-ref <audio_file> [options]
 ```
 
 **Required Arguments:**
+
 - `audio_file`: Path to audio file
 
 **Optional Arguments:**
+
 - `-n, --name`: Reference name (default: reference)
 - `--version`: RVC version - v1 or v2 (default: v2)
 - `--pitch_guidance`: Use pitch guidance (default: True)
@@ -343,6 +367,7 @@ rvc-cli create-ref <audio_file> [options]
 - `--alpha`: Alpha blending (default: 0.5)
 
 **Example:**
+
 ```bash
 rvc-cli create-ref reference_audio.wav -n myref --f0_method rmvpe
 ```
@@ -356,13 +381,16 @@ rvc-cli download -l <link> [options]
 ```
 
 **Required Arguments:**
+
 - `-l, --link`: Download link (HuggingFace or YouTube URL)
 
 **Optional Arguments:**
+
 - `-t, --type`: Download type - model, audio, or index (default: model)
 - `-n, --name`: Name to save as
 
 **Example:**
+
 ```bash
 rvc-cli download -l "https://huggingface.co/user/model/resolve/main/model.pth"
 ```
@@ -376,11 +404,13 @@ rvc-cli serve [options]
 ```
 
 **Optional Arguments:**
+
 - `--host`: Host to bind (default: 0.0.0.0)
 - `--port`: Port to bind (default: 7860)
 - `--share`: Create public share URL
 
 **Example:**
+
 ```bash
 rvc-cli serve --port 7860 --share
 ```
@@ -394,6 +424,7 @@ rvc-cli info
 ```
 
 Displays:
+
 - Operating system and version
 - CPU information
 - Memory and disk space
@@ -428,21 +459,23 @@ rvc-cli list-f0-methods
 
 ### Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `ARVC_ASSETS_PATH` | Path to assets directory | `assets` |
-| `ARVC_CONFIGS_PATH` | Path to configs directory | `configs` |
+| Variable            | Description               | Default          |
+| ------------------- | ------------------------- | ---------------- |
+| `ARVC_ASSETS_PATH`  | Path to assets directory  | `assets`         |
+| `ARVC_CONFIGS_PATH` | Path to configs directory | `configs`        |
 | `ARVC_WEIGHTS_PATH` | Path to weights directory | `assets/weights` |
-| `ARVC_LOGS_PATH` | Path to logs directory | `assets/logs` |
+| `ARVC_LOGS_PATH`    | Path to logs directory    | `assets/logs`    |
 
 ### Model and Index Files
 
 Place your model files (`.pth` or `.onnx`) in:
+
 ```
 advanced_rvc_inference/assets/weights/
 ```
 
 Place index files (`.index`) in:
+
 ```
 advanced_rvc_inference/assets/logs/<model_name>/
 ```
@@ -505,20 +538,24 @@ rvc-cli infer -m model_c.pth -i voice.wav -o voice_model_c.wav -p -2
 ### Common Issues
 
 #### "Model file not found"
+
 - Ensure the model path is correct
 - Check that the model file has `.pth` or `.onnx` extension
 - Verify file permissions
 
 #### "CUDA out of memory"
+
 - Reduce batch size: `--batch_size 4`
 - Enable checkpointing: `--checkpointing`
 - Use CPU: `--gpu -`
 
 #### "Audio format not supported"
+
 - Convert audio to WAV first: `ffmpeg -i input.mp3 output.wav`
 - Supported formats: wav, mp3, flac, ogg, opus, m4a, aac
 
 #### "F0 method not available"
+
 - Install ONNX runtime for some methods
 - Some methods require specific embedders
 
@@ -544,5 +581,4 @@ Contributions are welcome! Please read the contributing guidelines in CONTRIBUTI
 
 ## Support
 
-- GitHub Issues: https://github.com/ArkanDash/Advanced-RVC-Inference/issues
-- Discord: https://discord.gg/hvmsukmBHE
+- GitHub Issues: https://github.com/bh2619-k/RVC-Studio/issues
