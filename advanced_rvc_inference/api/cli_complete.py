@@ -53,10 +53,12 @@ logger = logging.getLogger(__name__)
 # Version and Info Functions
 # ============================================================================
 
+
 def get_version() -> str:
     """Get the package version."""
     try:
         from advanced_rvc_inference._version import __version__
+
         return __version__
     except ImportError:
         return "2.0.0"
@@ -65,7 +67,7 @@ def get_version() -> str:
 def show_version() -> None:
     """Show version information."""
     import torch
-    
+
     version_info = [
         f"Advanced RVC Inference v{get_version()}",
         f"Python: {platform.python_version()}",
@@ -87,7 +89,7 @@ def show_version() -> None:
 def show_info() -> None:
     """Show detailed system information."""
     import torch
-    
+
     info = [
         "=" * 60,
         "Advanced RVC Inference - System Information",
@@ -140,24 +142,47 @@ def show_info() -> None:
 # Utility Functions
 # ============================================================================
 
+
 def get_f0_methods() -> List[str]:
     """Get list of available F0 prediction methods."""
     return [
-        "pm", "dio", "mangio-crepe-tiny", "mangio-crepe-small", 
-        "mangio-crepe-medium", "mangio-crepe-large", "mangio-crepe-full",
-        "crepe-tiny", "crepe-small", "crepe-medium", "crepe-large", 
-        "crepe-full", "fcpe", "fcpe-legacy", "rmvpe", "rmvpe-legacy", 
-        "harvest", "yin", "pyin", "swipe"
+        "pm",
+        "dio",
+        "mangio-crepe-tiny",
+        "mangio-crepe-small",
+        "mangio-crepe-medium",
+        "mangio-crepe-large",
+        "mangio-crepe-full",
+        "crepe-tiny",
+        "crepe-small",
+        "crepe-medium",
+        "crepe-large",
+        "crepe-full",
+        "fcpe",
+        "fcpe-legacy",
+        "rmvpe",
+        "rmvpe-legacy",
+        "harvest",
+        "yin",
+        "pyin",
+        "swipe",
     ]
 
 
 def get_embedder_models() -> List[str]:
     """Get list of available embedder models."""
     return [
-        "hubert_base", "hubert_large", "hubert_xlarge",
-        "contentvec_base", "contentvec_large", "contentvec_xlarge",
-        "whisper_base", "whisper_small", "whisper_medium", 
-        "whisper_large", "whisper_large_v2"
+        "hubert_base",
+        "hubert_large",
+        "hubert_xlarge",
+        "contentvec_base",
+        "contentvec_large",
+        "contentvec_xlarge",
+        "whisper_base",
+        "whisper_small",
+        "whisper_medium",
+        "whisper_large",
+        "whisper_large_v2",
     ]
 
 
@@ -169,16 +194,52 @@ def get_embedder_modes() -> List[str]:
 def get_separator_models() -> List[str]:
     """Get list of available music separation models."""
     return [
-        "Main_340", "Main_390", "Main_406", "Main_427", "Main_438",
-        "Inst_full_292", "Inst_HQ_1", "Inst_HQ_2", "Inst_HQ_3", 
-        "Inst_HQ_4", "Inst_HQ_5", "Kim_Vocal_1", "Kim_Vocal_2", 
-        "Kim_Inst", "Inst_187_beta", "Inst_82_beta", "Inst_90_beta",
-        "Voc_FT", "Crowd_HQ", "MDXNET_9482", "Inst_1", "Inst_2", 
-        "Inst_3", "MDXNET_1_9703", "MDXNET_2_9682", "MDXNET_3_9662",
-        "Inst_Main", "MDXNET_Main", "HT-Tuned", "HT-Normal", 
-        "HD_MMI", "HT_6S", "HP-1", "HP-2", "HP-Vocal-1", "HP-Vocal-2",
-        "HP2-1", "HP2-2", "HP2-3", "SP-2B-1", "SP-2B-2", "SP-3B-1",
-        "SP-4B-1", "SP-4B-2", "SP-MID-1", "SP-MID-2"
+        "Main_340",
+        "Main_390",
+        "Main_406",
+        "Main_427",
+        "Main_438",
+        "Inst_full_292",
+        "Inst_HQ_1",
+        "Inst_HQ_2",
+        "Inst_HQ_3",
+        "Inst_HQ_4",
+        "Inst_HQ_5",
+        "Kim_Vocal_1",
+        "Kim_Vocal_2",
+        "Kim_Inst",
+        "Inst_187_beta",
+        "Inst_82_beta",
+        "Inst_90_beta",
+        "Voc_FT",
+        "Crowd_HQ",
+        "MDXNET_9482",
+        "Inst_1",
+        "Inst_2",
+        "Inst_3",
+        "MDXNET_1_9703",
+        "MDXNET_2_9682",
+        "MDXNET_3_9662",
+        "Inst_Main",
+        "MDXNET_Main",
+        "HT-Tuned",
+        "HT-Normal",
+        "HD_MMI",
+        "HT_6S",
+        "HP-1",
+        "HP-2",
+        "HP-Vocal-1",
+        "HP-Vocal-2",
+        "HP2-1",
+        "HP2-2",
+        "HP2-3",
+        "SP-2B-1",
+        "SP-2B-2",
+        "SP-3B-1",
+        "SP-4B-1",
+        "SP-4B-2",
+        "SP-MID-1",
+        "SP-MID-2",
     ]
 
 
@@ -219,23 +280,24 @@ def validate_model_file(path: str) -> bool:
 # Inference Command
 # ============================================================================
 
+
 def cmd_inference(args: argparse.Namespace) -> int:
     """Run voice conversion inference."""
     logger.info("Starting voice conversion inference...")
-    
+
     try:
         from advanced_rvc_inference.rvc.infer.inference import convert
-        
+
         # Validate inputs
         if not validate_input_file(args.input):
             return 1
-        
+
         if args.model and not validate_model_file(args.model):
             return 1
-        
+
         # Set defaults
         output_path = args.output or args.input.replace(".", f"_converted.")
-        
+
         # Build parameters
         convert(
             pitch=args.pitch,
@@ -268,19 +330,20 @@ def cmd_inference(args: argparse.Namespace) -> int:
             proposal_pitch_threshold=args.proposal_pitch_threshold,
             audio_processing=args.audio_processing,
             alpha=args.alpha,
-            sid=args.speaker_id or 0
+            sid=args.speaker_id or 0,
         )
-        
+
         logger.info(f"Inference completed successfully!")
         logger.info(f"Output saved to: {output_path}")
         return 0
-        
+
     except ImportError as e:
         logger.error(f"Failed to import inference module: {e}")
         return 1
     except Exception as e:
         logger.error(f"Inference failed: {e}")
         import traceback
+
         logger.debug(traceback.format_exc())
         return 1
 
@@ -288,39 +351,38 @@ def cmd_inference(args: argparse.Namespace) -> int:
 def cmd_batch_inference(args: argparse.Namespace) -> int:
     """Run batch voice conversion inference on multiple files."""
     logger.info("Starting batch voice conversion inference...")
-    
+
     try:
         from advanced_rvc_inference.rvc.infer.inference import convert
-        
+
         input_path = Path(args.input_dir)
         output_dir = Path(args.output_dir)
-        
+
         if not input_path.exists():
             logger.error(f"Input directory not found: {input_path}")
             return 1
-        
+
         if not output_dir.exists():
             output_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # Find all audio files
         audio_extensions = [".wav", ".mp3", ".flac", ".ogg", ".m4a", ".aac"]
         audio_files = [
-            f for f in input_path.iterdir() 
-            if f.is_file() and f.suffix.lower() in audio_extensions
+            f for f in input_path.iterdir() if f.is_file() and f.suffix.lower() in audio_extensions
         ]
-        
+
         if not audio_files:
             logger.error(f"No audio files found in {input_path}")
             return 1
-        
+
         logger.info(f"Found {len(audio_files)} audio files to process")
-        
+
         success_count = 0
         for audio_file in audio_files:
             output_path = output_dir / f"{audio_file.stem}_converted{args.format}"
-            
+
             logger.info(f"Processing: {audio_file.name}")
-            
+
             try:
                 convert(
                     pitch=args.pitch,
@@ -353,17 +415,19 @@ def cmd_batch_inference(args: argparse.Namespace) -> int:
                     proposal_pitch_threshold=args.proposal_pitch_threshold,
                     audio_processing=args.audio_processing,
                     alpha=args.alpha,
-                    sid=args.speaker_id or 0
+                    sid=args.speaker_id or 0,
                 )
                 success_count += 1
                 logger.info(f"  Completed: {output_path}")
-                
+
             except Exception as e:
                 logger.error(f"  Failed to process {audio_file.name}: {e}")
-        
-        logger.info(f"Batch inference completed: {success_count}/{len(audio_files)} files processed successfully")
+
+        logger.info(
+            f"Batch inference completed: {success_count}/{len(audio_files)} files processed successfully"
+        )
         return 0 if success_count > 0 else 1
-        
+
     except ImportError as e:
         logger.error(f"Failed to import inference module: {e}")
         return 1
@@ -376,11 +440,13 @@ def cmd_batch_inference(args: argparse.Namespace) -> int:
 # Training Commands
 # ============================================================================
 
+
 def cmd_train(args: argparse.Namespace) -> int:
     """Start model training."""
     logger.info("Preparing model training...")
-    
-    print("""
+
+    print(
+        """
     Model training is best performed through the web interface for full features.
     
     To launch the web interface:
@@ -395,28 +461,32 @@ def cmd_train(args: argparse.Namespace) -> int:
     
     Alternatively, you can use the training module directly:
         python -m advanced_rvc_inference --train --model_name <name> --save_every_epoch <num>
-    """)
-    
+    """
+    )
+
     return 0
 
 
 def cmd_create_dataset(args: argparse.Namespace) -> int:
     """Create training dataset from audio source."""
     logger.info("Starting dataset creation...")
-    
+
     try:
         from advanced_rvc_inference.create_dataset import main as create_dataset_main
-        
+
         # Build command line arguments
         cmd_args = [
-            "--input_data", args.input_data,
-            "--output_dirs", args.output_dir,
-            "--sample_rate", str(args.sample_rate),
+            "--input_data",
+            args.input_data,
+            "--output_dirs",
+            args.output_dir,
+            "--sample_rate",
+            str(args.sample_rate),
         ]
-        
+
         if args.clean_dataset:
             cmd_args.extend(["--clean_dataset", "--clean_strength", str(args.clean_strength)])
-        
+
         if not args.separate:
             cmd_args.extend(["--separate", "False"])
         else:
@@ -425,13 +495,16 @@ def cmd_create_dataset(args: argparse.Namespace) -> int:
                 cmd_args.extend(["--model_name", args.separator_model])
             if args.reverb_model:
                 cmd_args.extend(["--reverb_model", args.reverb_model])
-        
+
         # Run dataset creation
-        subprocess.run([sys.executable, "-m", "advanced_rvc_inference", "--create_dataset"] + cmd_args, check=True)
-        
+        subprocess.run(
+            [sys.executable, "-m", "advanced_rvc_inference", "--create_dataset"] + cmd_args,
+            check=True,
+        )
+
         logger.info("Dataset creation completed successfully!")
         return 0
-        
+
     except subprocess.CalledProcessError as e:
         logger.error(f"Dataset creation failed: {e}")
         return 1
@@ -443,8 +516,9 @@ def cmd_create_dataset(args: argparse.Namespace) -> int:
 def cmd_preprocess(args: argparse.Namespace) -> int:
     """Preprocess training data."""
     logger.info("Starting preprocessing...")
-    
-    print(f"""
+
+    print(
+        f"""
     Preprocessing configuration:
         Model: {args.model_name}
         Dataset path: {args.dataset_path}
@@ -456,16 +530,18 @@ def cmd_preprocess(args: argparse.Namespace) -> int:
     This operation is best performed through the web interface for full control.
     Run: rvc-cli serve
     Then navigate to the Training tab.
-    """)
-    
+    """
+    )
+
     return 0
 
 
 def cmd_extract(args: argparse.Namespace) -> int:
     """Extract features for training."""
     logger.info("Starting feature extraction...")
-    
-    print(f"""
+
+    print(
+        f"""
     Feature extraction configuration:
         Model: {args.model_name}
         RVC version: {args.rvc_version}
@@ -477,16 +553,18 @@ def cmd_extract(args: argparse.Namespace) -> int:
     This operation is best performed through the web interface for full control.
     Run: rvc-cli serve
     Then navigate to the Training tab.
-    """)
-    
+    """
+    )
+
     return 0
 
 
 def cmd_create_index(args: argparse.Namespace) -> int:
     """Create index file for feature retrieval."""
     logger.info("Starting index creation...")
-    
-    print(f"""
+
+    print(
+        f"""
     Index creation configuration:
         Model name: {args.model_name}
         RVC version: {args.rvc_version}
@@ -495,8 +573,9 @@ def cmd_create_index(args: argparse.Namespace) -> int:
     This operation is best performed through the web interface for full control.
     Run: rvc-cli serve
     Then navigate to the Training tab.
-    """)
-    
+    """
+    )
+
     return 0
 
 
@@ -504,25 +583,35 @@ def cmd_create_index(args: argparse.Namespace) -> int:
 # Audio Processing Commands
 # ============================================================================
 
+
 def cmd_separate(args: argparse.Namespace) -> int:
     """Separate music into vocals and instruments."""
     logger.info("Starting music separation...")
-    
+
     try:
         from advanced_rvc_inference.separate_music import main as separate_main
-        
+
         cmd_args = [
-            "--input_path", args.input,
-            "--output_dirs", args.output_dir,
-            "--export_format", args.format,
-            "--sample_rate", str(args.sample_rate),
-            "--model_name", args.model,
-            "--shifts", str(args.shifts),
-            "--batch_size", str(args.batch_size),
-            "--overlap", str(args.overlap),
-            "--aggression", str(args.aggression),
+            "--input_path",
+            args.input,
+            "--output_dirs",
+            args.output_dir,
+            "--export_format",
+            args.format,
+            "--sample_rate",
+            str(args.sample_rate),
+            "--model_name",
+            args.model,
+            "--shifts",
+            str(args.shifts),
+            "--batch_size",
+            str(args.batch_size),
+            "--overlap",
+            str(args.overlap),
+            "--aggression",
+            str(args.aggression),
         ]
-        
+
         if args.karaoke_model:
             cmd_args.extend(["--karaoke_model", args.karaoke_model])
         if args.reverb_model:
@@ -541,13 +630,16 @@ def cmd_separate(args: argparse.Namespace) -> int:
             cmd_args.extend(["--separate_backing"])
         if args.separate_reverb:
             cmd_args.extend(["--separate_reverb"])
-        
-        subprocess.run([sys.executable, "-m", "advanced_rvc_inference", "--separate_music"] + cmd_args, check=True)
-        
+
+        subprocess.run(
+            [sys.executable, "-m", "advanced_rvc_inference", "--separate_music"] + cmd_args,
+            check=True,
+        )
+
         logger.info("Music separation completed successfully!")
         logger.info(f"Output saved to: {args.output_dir}")
         return 0
-        
+
     except subprocess.CalledProcessError as e:
         logger.error(f"Music separation failed: {e}")
         return 1
@@ -559,8 +651,9 @@ def cmd_separate(args: argparse.Namespace) -> int:
 def cmd_create_reference(args: argparse.Namespace) -> int:
     """Create reference audio for training."""
     logger.info("Starting reference creation...")
-    
-    print(f"""
+
+    print(
+        f"""
     Reference creation configuration:
         Audio path: {args.audio_path}
         Reference name: {args.reference_name}
@@ -570,8 +663,9 @@ def cmd_create_reference(args: argparse.Namespace) -> int:
         Embedder: {args.embedder_model}
         F0 method: {args.f0_method}
         Pitch shift: {args.f0_up_key}
-    """)
-    
+    """
+    )
+
     return 0
 
 
@@ -579,11 +673,13 @@ def cmd_create_reference(args: argparse.Namespace) -> int:
 # TTS Command
 # ============================================================================
 
+
 def cmd_tts(args: argparse.Namespace) -> int:
     """Text-to-speech voice conversion."""
     logger.info("Starting TTS voice conversion...")
-    
-    print(f"""
+
+    print(
+        f"""
     TTS conversion configuration:
         Text/Input: {args.text or args.input}
         Model: {args.model}
@@ -596,8 +692,9 @@ def cmd_tts(args: argparse.Namespace) -> int:
     This feature is best used through the web interface.
     Run: rvc-cli serve
     Then navigate to the TTS tab for full functionality.
-    """)
-    
+    """
+    )
+
     return 0
 
 
@@ -605,17 +702,20 @@ def cmd_tts(args: argparse.Namespace) -> int:
 # Model Management Commands
 # ============================================================================
 
+
 def cmd_list_models(args: argparse.Namespace) -> int:
     """List available models."""
     weights_path = Path("assets/weights")
-    
+
     if not weights_path.exists():
         logger.warning("No models directory found at: assets/weights")
-        logger.info("You can specify model path directly or configure the weights directory in settings.")
+        logger.info(
+            "You can specify model path directly or configure the weights directory in settings."
+        )
         return 0
-    
+
     models = list(weights_path.glob("*.pth")) + list(weights_path.glob("*.onnx"))
-    
+
     if not models:
         logger.info("No models found in assets/weights directory.")
         logger.info("To add models:")
@@ -623,32 +723,32 @@ def cmd_list_models(args: argparse.Namespace) -> int:
         logger.info("  2. Place .pth or .onnx files in assets/weights/")
         logger.info("  3. Use rvc-cli models list to refresh")
         return 0
-    
+
     print("\n" + "=" * 60)
     print("Available Models")
     print("=" * 60)
     print(f"{'Model Name':<50} {'Size':<10}")
     print("-" * 60)
-    
+
     for model in sorted(models):
         size_mb = model.stat().st_size / (1024 * 1024)
         print(f"{model.name:<50} {size_mb:.1f} MB")
-    
+
     print("-" * 60)
     print(f"Total: {len(models)} models")
     print("=" * 60 + "\n")
-    
+
     return 0
 
 
 def cmd_model_info(args: argparse.Namespace) -> int:
     """Show information about a specific model."""
     model_path = Path(args.model)
-    
+
     if not model_path.exists():
         logger.error(f"Model file not found: {model_path}")
         return 1
-    
+
     print("\n" + "=" * 60)
     print(f"Model Information: {model_path.name}")
     print("=" * 60)
@@ -659,7 +759,7 @@ def cmd_model_info(args: argparse.Namespace) -> int:
     print("Note: Detailed model information (version, sample rate, etc.)")
     print("is available through the web interface.")
     print("=" * 60 + "\n")
-    
+
     return 0
 
 
@@ -667,20 +767,21 @@ def cmd_model_info(args: argparse.Namespace) -> int:
 # Serve Command
 # ============================================================================
 
+
 def cmd_serve(args: argparse.Namespace) -> int:
     """Launch the web interface."""
     logger.info("Starting web interface...")
-    
+
     try:
         from advanced_rvc_inference import gui
-        
+
         gui.launch(
             share=args.share,
             server_name=args.host,
             server_port=args.port,
         )
         return 0
-        
+
     except ImportError as e:
         logger.error(f"Failed to import GUI module: {e}")
         return 1
@@ -693,9 +794,11 @@ def cmd_serve(args: argparse.Namespace) -> int:
 # Utility Commands
 # ============================================================================
 
+
 def cmd_utils_info(args: argparse.Namespace) -> int:
     """Display utility information."""
-    print("""
+    print(
+        """
     Advanced RVC Inference - Utility Commands
     
     Available utilities:
@@ -705,7 +808,8 @@ def cmd_utils_info(args: argparse.Namespace) -> int:
         reset-config    Reset configuration to defaults
     
     Use: rvc-cli utils <utility> [options]
-    """)
+    """
+    )
     return 0
 
 
@@ -713,38 +817,42 @@ def cmd_check_gpu(args: argparse.Namespace) -> int:
     """Check GPU availability."""
     try:
         import torch
-        
+
         print("\n" + "=" * 60)
         print("GPU Information")
         print("=" * 60)
-        
+
         if torch.cuda.is_available():
             print(f"CUDA Available: Yes")
             print(f"CUDA Version: {torch.version.cuda}")
             print(f"Number of GPUs: {torch.cuda.device_count()}")
-            
+
             for i in range(torch.cuda.device_count()):
                 props = torch.cuda.get_device_properties(i)
                 print(f"\nGPU {i}: {props.name}")
                 print(f"  Memory Total: {props.total_memory / (1024**3):.1f} GB")
                 print(f"  Compute Capability: {props.major}.{props.minor}")
-            
+
             # Check memory usage
             print(f"\nCurrent Memory Usage:")
             for i in range(torch.cuda.device_count()):
                 mem_allocated = torch.cuda.memory_allocated(i) / (1024**3)
                 mem_reserved = torch.cuda.memory_reserved(i) / (1024**3)
-                print(f"  GPU {i}: {mem_allocated:.2f} GB allocated, {mem_reserved:.2f} GB reserved")
+                print(
+                    f"  GPU {i}: {mem_allocated:.2f} GB allocated, {mem_reserved:.2f} GB reserved"
+                )
         else:
             print("CUDA Available: No")
             print("\nTo enable GPU acceleration:")
             print("  1. Install CUDA Toolkit")
             print("  2. Install PyTorch with CUDA support:")
-            print("     pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118")
-        
+            print(
+                "     pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118"
+            )
+
         print("=" * 60 + "\n")
         return 0
-        
+
     except ImportError:
         logger.error("PyTorch is not installed")
         return 1
@@ -755,7 +863,7 @@ def cmd_check_deps(args: argparse.Namespace) -> int:
     print("\n" + "=" * 60)
     print("Dependency Check")
     print("=" * 60)
-    
+
     required_deps = [
         ("torch", "PyTorch"),
         ("torchvision", "TorchVision"),
@@ -765,7 +873,7 @@ def cmd_check_deps(args: argparse.Namespace) -> int:
         ("numpy", "NumPy"),
         ("scipy", "SciPy"),
     ]
-    
+
     all_ok = True
     for module, name in required_deps:
         try:
@@ -774,28 +882,28 @@ def cmd_check_deps(args: argparse.Namespace) -> int:
         except ImportError:
             print(f"  [MISSING] {name}")
             all_ok = False
-    
+
     print("=" * 60)
-    
+
     if all_ok:
         print("All dependencies are installed.\n")
         return 0
     else:
         print("Some dependencies are missing. Install with:")
-        print("  pip install advanced-rvc-inference\n")
+        print("  pip install RVC-Studio\n")
         return 1
 
 
 def cmd_clean_cache(args: argparse.Namespace) -> int:
     """Clean temporary files and cache."""
     print("Cleaning cache directories...")
-    
+
     cache_dirs = [
         Path("__pycache__"),
         Path(".cache"),
         Path("cache"),
     ]
-    
+
     cleaned = 0
     for cache_dir in cache_dirs:
         if cache_dir.exists():
@@ -805,7 +913,7 @@ def cmd_clean_cache(args: argparse.Namespace) -> int:
                 cleaned += 1
             except Exception as e:
                 logger.warning(f"Failed to remove {cache_dir}: {e}")
-    
+
     logger.info(f"Cleaned {cleaned} cache directories")
     return 0
 
@@ -813,14 +921,17 @@ def cmd_clean_cache(args: argparse.Namespace) -> int:
 def cmd_reset_config(args: argparse.Namespace) -> int:
     """Reset configuration to defaults."""
     config_path = Path("configs/config.json")
-    
+
     if config_path.exists():
-        backup_path = config_path.with_suffix(f".json.backup.{datetime.now().strftime('%Y%m%d_%H%M%S')}")
+        backup_path = config_path.with_suffix(
+            f".json.backup.{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        )
         shutil.copy(config_path, backup_path)
         logger.info(f"Backup created: {backup_path}")
-    
+
     logger.info("Configuration reset initiated through web interface.")
-    print("""
+    print(
+        """
     To reset configuration:
         1. Run: rvc-cli serve
         2. Go to Settings tab
@@ -828,7 +939,8 @@ def cmd_reset_config(args: argparse.Namespace) -> int:
     
     Or manually delete: configs/config.json
     A new default config will be created on next run.
-    """)
+    """
+    )
     return 0
 
 
@@ -836,9 +948,10 @@ def cmd_reset_config(args: argparse.Namespace) -> int:
 # Main Parser Creation
 # ============================================================================
 
+
 def create_parser() -> argparse.ArgumentParser:
     """Create the main argument parser with all subcommands."""
-    
+
     parser = argparse.ArgumentParser(
         prog="rvc-cli",
         description=__doc__,
@@ -861,29 +974,30 @@ Examples:
   rvc-cli utils check-gpu
 
 For more information, visit:
-  https://github.com/ArkanDash/Advanced-RVC-Inference
+  https://github.com/bh2619-k/RVC-Studio
         """.strip(),
     )
-    
+
     parser.add_argument(
         "--version",
         action="version",
         version=f"Advanced RVC Inference v{get_version()}",
     )
-    
+
     parser.add_argument(
-        "-v", "--verbose",
+        "-v",
+        "--verbose",
         action="store_true",
         help="Enable verbose (debug) logging",
     )
-    
+
     # Create subparsers
     subparsers = parser.add_subparsers(
         title="commands",
         dest="command",
         description="Available commands",
     )
-    
+
     # =========================================================================
     # Inference Command
     # =========================================================================
@@ -894,27 +1008,32 @@ For more information, visit:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     infer_parser.add_argument(
-        "-m", "--model",
+        "-m",
+        "--model",
         required=True,
         help="Path to the RVC model file (.pth or .onnx)",
     )
     infer_parser.add_argument(
-        "-i", "--input",
+        "-i",
+        "--input",
         required=True,
         help="Path to the input audio file",
     )
     infer_parser.add_argument(
-        "-o", "--output",
+        "-o",
+        "--output",
         help="Path to the output audio file (default: auto-generated)",
     )
     infer_parser.add_argument(
-        "-p", "--pitch",
+        "-p",
+        "--pitch",
         type=int,
         default=0,
         help="Pitch shift in semitones (default: 0)",
     )
     infer_parser.add_argument(
-        "-f", "--format",
+        "-f",
+        "--format",
         default="wav",
         choices=get_export_formats(),
         help="Output format (default: wav)",
@@ -1071,7 +1190,7 @@ For more information, visit:
         help="Path to pre-existing F0 file",
     )
     infer_parser.set_defaults(handler=cmd_inference)
-    
+
     # =========================================================================
     # Batch Inference Command
     # =========================================================================
@@ -1082,28 +1201,33 @@ For more information, visit:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     batch_parser.add_argument(
-        "-m", "--model",
+        "-m",
+        "--model",
         required=True,
         help="Path to the RVC model file (.pth or .onnx)",
     )
     batch_parser.add_argument(
-        "-i", "--input_dir",
+        "-i",
+        "--input_dir",
         required=True,
         help="Directory containing input audio files",
     )
     batch_parser.add_argument(
-        "-o", "--output_dir",
+        "-o",
+        "--output_dir",
         required=True,
         help="Directory for output audio files",
     )
     batch_parser.add_argument(
-        "-p", "--pitch",
+        "-p",
+        "--pitch",
         type=int,
         default=0,
         help="Pitch shift in semitones (default: 0)",
     )
     batch_parser.add_argument(
-        "-f", "--format",
+        "-f",
+        "--format",
         default="wav",
         choices=get_export_formats(),
         help="Output format (default: wav)",
@@ -1244,7 +1368,7 @@ For more information, visit:
         help="Pitch blending threshold (default: 0.5)",
     )
     batch_parser.set_defaults(handler=cmd_batch_inference)
-    
+
     # =========================================================================
     # Training Command
     # =========================================================================
@@ -1288,7 +1412,7 @@ For more information, visit:
         help="GPU device number (default: 0, use - for CPU)",
     )
     train_parser.set_defaults(handler=cmd_train)
-    
+
     # =========================================================================
     # Dataset Command
     # =========================================================================
@@ -1352,7 +1476,7 @@ For more information, visit:
         help="Reverb separation model",
     )
     dataset_parser.set_defaults(handler=cmd_create_dataset)
-    
+
     # =========================================================================
     # Preprocess Command
     # =========================================================================
@@ -1425,7 +1549,7 @@ For more information, visit:
         help="Audio normalization processing",
     )
     preprocess_parser.set_defaults(handler=cmd_preprocess)
-    
+
     # =========================================================================
     # Extract Command
     # =========================================================================
@@ -1521,7 +1645,7 @@ For more information, visit:
         help="Also extract RMS energy",
     )
     extract_parser.set_defaults(handler=cmd_extract)
-    
+
     # =========================================================================
     # Index Command
     # =========================================================================
@@ -1549,7 +1673,7 @@ For more information, visit:
         help="Index algorithm to use",
     )
     index_parser.set_defaults(handler=cmd_create_index)
-    
+
     # =========================================================================
     # Separate Command
     # =========================================================================
@@ -1560,17 +1684,20 @@ For more information, visit:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     separate_parser.add_argument(
-        "-i", "--input",
+        "-i",
+        "--input",
         required=True,
         help="Path to input audio file",
     )
     separate_parser.add_argument(
-        "-o", "--output_dir",
+        "-o",
+        "--output_dir",
         default="./separated",
         help="Output file save folder",
     )
     separate_parser.add_argument(
-        "-f", "--format",
+        "-f",
+        "--format",
         default="wav",
         choices=get_export_formats(),
         help="Export format",
@@ -1681,7 +1808,7 @@ For more information, visit:
         help="Separate vocal reverb",
     )
     separate_parser.set_defaults(handler=cmd_separate)
-    
+
     # =========================================================================
     # Reference Command
     # =========================================================================
@@ -1787,7 +1914,7 @@ For more information, visit:
         help="Pitch blending threshold",
     )
     reference_parser.set_defaults(handler=cmd_create_reference)
-    
+
     # =========================================================================
     # TTS Command
     # =========================================================================
@@ -1806,7 +1933,8 @@ For more information, visit:
         help="Path to text file with speech to convert",
     )
     tts_parser.add_argument(
-        "-m", "--model",
+        "-m",
+        "--model",
         required=True,
         help="Path to RVC model file",
     )
@@ -1815,7 +1943,8 @@ For more information, visit:
         help="Path to index file",
     )
     tts_parser.add_argument(
-        "-p", "--pitch",
+        "-p",
+        "--pitch",
         type=int,
         default=0,
         help="Pitch shift in semitones",
@@ -1833,17 +1962,19 @@ For more information, visit:
         help="F0 prediction method",
     )
     tts_parser.add_argument(
-        "-f", "--format",
+        "-f",
+        "--format",
         default="wav",
         choices=get_export_formats(),
         help="Output format",
     )
     tts_parser.add_argument(
-        "-o", "--output",
+        "-o",
+        "--output",
         help="Output file path",
     )
     tts_parser.set_defaults(handler=cmd_tts)
-    
+
     # =========================================================================
     # Models Command
     # =========================================================================
@@ -1858,14 +1989,14 @@ For more information, visit:
         dest="model_action",
         description="Model actions",
     )
-    
+
     list_parser = models_subparsers.add_parser(
         "list",
         help="List available models",
         description="List all available RVC models",
     )
     list_parser.set_defaults(handler=cmd_list_models)
-    
+
     info_parser = models_subparsers.add_parser(
         "info",
         help="Show model information",
@@ -1876,7 +2007,7 @@ For more information, visit:
         help="Path to model file",
     )
     info_parser.set_defaults(handler=cmd_model_info)
-    
+
     # =========================================================================
     # Serve Command
     # =========================================================================
@@ -1903,7 +2034,7 @@ For more information, visit:
         help="Create a public URL using Gradio sharing",
     )
     serve_parser.set_defaults(handler=cmd_serve)
-    
+
     # =========================================================================
     # Utils Command
     # =========================================================================
@@ -1918,42 +2049,42 @@ For more information, visit:
         dest="utils_action",
         description="Available utilities",
     )
-    
+
     utils_info_parser = utils_subparsers.add_parser(
         "info",
         help="Display utility information",
         description="Display information about available utilities",
     )
     utils_info_parser.set_defaults(handler=cmd_utils_info)
-    
+
     check_gpu_parser = utils_subparsers.add_parser(
         "check-gpu",
         help="Check GPU availability",
         description="Check GPU availability and configuration",
     )
     check_gpu_parser.set_defaults(handler=cmd_check_gpu)
-    
+
     check_deps_parser = utils_subparsers.add_parser(
         "check-deps",
         help="Check dependencies",
         description="Verify all dependencies are installed",
     )
     check_deps_parser.set_defaults(handler=cmd_check_deps)
-    
+
     clean_cache_parser = utils_subparsers.add_parser(
         "clean-cache",
         help="Clean temporary files",
         description="Clean temporary files and cache",
     )
     clean_cache_parser.set_defaults(handler=cmd_clean_cache)
-    
+
     reset_config_parser = utils_subparsers.add_parser(
         "reset-config",
         help="Reset configuration",
         description="Reset configuration to defaults",
     )
     reset_config_parser.set_defaults(handler=cmd_reset_config)
-    
+
     # =========================================================================
     # Version Command
     # =========================================================================
@@ -1963,7 +2094,7 @@ For more information, visit:
         description="Show version and system information",
     )
     version_parser.set_defaults(handler=lambda args: (show_version(), 0))
-    
+
     # =========================================================================
     # Info Command
     # =========================================================================
@@ -1973,7 +2104,7 @@ For more information, visit:
         description="Show detailed system and package information",
     )
     info_parser.set_defaults(handler=lambda args: (show_info(), 0))
-    
+
     return parser
 
 
@@ -1981,30 +2112,31 @@ For more information, visit:
 # Main Entry Point
 # ============================================================================
 
+
 def main():
     """Main entry point for the CLI."""
     # Setup environment
     package_root = Path(__file__).parent.parent
     if str(package_root) not in sys.path:
         sys.path.insert(0, str(package_root))
-    
+
     os.chdir(package_root)
-    
+
     # Create parser
     parser = create_parser()
-    
+
     # Parse arguments
     args = parser.parse_args()
-    
+
     # Handle verbose flag
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
-    
+
     # Handle no command
     if args.command is None:
         parser.print_help()
         return 0
-    
+
     # Call the appropriate handler
     handler = getattr(args, "handler", None)
     if handler:
@@ -2016,9 +2148,10 @@ def main():
         except Exception as e:
             logger.error(f"Error: {e}")
             import traceback
+
             logger.debug(traceback.format_exc())
             return 1
-    
+
     return 0
 
 
